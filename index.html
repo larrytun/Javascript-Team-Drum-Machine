@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="icon" href="http://images.clipartpanda.com/musical-notes-png-free-vector-musical-note-3-dennis-b-01r_101219_musical_note_3_dennis_b_01r.png">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
     <link rel="stylesheet" href="build/css/vendor.css">
     <link rel="stylesheet" href="build/css/styles.css">
     <script src="build/js/vendor.min.js"></script>
@@ -9,14 +10,19 @@
     <title>Drum Machine</title>
   </head>
   <body>
+    <div id="drum-body" class="container">
+      <img src="public/img/BMOBLANK.png"  id="BMO" alt="" />
+      <img src="public/img/play.png" id="playbutton" alt="" />
+      <img src="public/img/stop.png" id="stopbutton" alt="" />
+      <img src="public/img/tempo-button-up.png" id="tempobuttonup" alt="" />
+      <img src="public/img/tempo-button-down.png" id="tempobuttondn" alt="" />
+      <img src="public/img/tempodisplay.png" id="tempodisplay" alt="" />
 
-    <div id="drum-body">
-      <img src="public/img/BMOBLANK.png" alt="" />
-      <div id="triangle1" onclick="">
+      <div class="container" id="track-area">
+        <img src="public/img/instrument-display.png" id="instruments" alt="" />
+        <h1>BMO</h1>
       </div>
 
-      <div id="triangle2">
-      </div>
     </div>
 
     <button id="toggle">Play</button>
