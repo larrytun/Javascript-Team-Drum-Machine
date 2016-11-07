@@ -3,33 +3,40 @@ function Machine() {
   this.i = 0;
   this.playing = false;
   this.loop;
+  this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 }
 
 Machine.prototype.toggleLoop = function() {
-  // console.log(this.playing);
   var _this = this;
-  function integerPrint() {
+  function metronome() {
     if( _this.i < _this.steps) {
       _this.i++;
-      console.log("IF " + _this.i);
+      console.log("If: " + _this.boolArray[_this.i]);
     } else {
       _this.i = 0;
       _this.i++;
-      console.log("Else " + _this.i);
+      console.log("Else " + _this.boolArray[_this.i]);
     }
   }
-  console.log("Toggle Loop Playing: " + this.playing);
   this.playing = true;
-  console.log("Toggle Loop Playing: " + this.playing);
-  this.loop = setInterval(integerPrint, 125);
+  this.loop = setInterval(metronome, 125);
 };
 
 Machine.prototype.stopLoop = function() {
-  console.log("Stop Loop Playing: " + this.playing);
   this.playing = false;
-  console.log("Stop Loop Playing: " + this.playing);
-  console.log(this.loop);
   clearInterval(this.loop);
 };
 
+Machine.prototype.toggleStep = function(index) {
+  if (this.boolArray[index]) {
+    this.boolArray[index] = false;
+  } else {
+    this.boolArray[index] = true;
+  }
+};
+
 exports.MachineModule = Machine;
+
+//Front-End Emulation
+var machine = new Machine();
+machine.toggleStep(1);
