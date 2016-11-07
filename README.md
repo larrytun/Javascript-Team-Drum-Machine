@@ -4,6 +4,18 @@
 
 #### By _** Blake, Caleb, Jeremy, Larry**_
 
+### Specs
+| Behavior                                             | Input | Output |
+|------------------------------------------------------|-------|--------|
+| Program plays through 8 steps every second           |       |        |
+| Program plays through 1 measure                      |       |        |
+| Program loops through one measure                    |       |        |
+| Program stops loop                                   |       |        |
+| Program plays sample                                 |       |        |
+| Program plays sample on selected steps               |       |        |
+| Program plays two different samples at the same time |       |        |
+| Program runs through multiple looped tracks          |       |        |
+
 ## User Story
 
 ## Description
@@ -11,9 +23,7 @@
 ## Setup/Installation Requirements
 
 * _Clone this repository to your desktop_
-* _rename this file and the associated js files_
-* _delete the git file_
-* _run npm init and bower init in the home directory_
+* _run npm install and bower install in the home directory_
 * _run all commands in the npm_commands.txt_
 
 ## Behavior Driven Development
