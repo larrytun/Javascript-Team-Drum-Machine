@@ -10,15 +10,17 @@
   "license": "ISC",
   "devDependencies": {
     "bower-files": "^3.14.1",
-    "browser-sync": "^2.17.2",
-    "browserify": "^13.1.0",
+    "browser-sync": "^2.17.5",
+    "browserify": "^13.1.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "gulp-jshint": "^2.0.1",
+    "gulp-jshint": "^2.0.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "jshint": "^2.9.3",
+    "jshint": "^2.9.4",
     "vinyl-source-stream": "^1.1.0"
   }
 }
