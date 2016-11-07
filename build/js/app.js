@@ -3,41 +3,49 @@ function Machine() {
   this.steps = 16;
   this.i = 0;
   this.playing = false;
+  this.loop;
 }
 
 Machine.prototype.toggleLoop = function() {
-  var loop;
-  if (!this.playing) {
-    loop = setInterval(this.integerPrint, 125);
-    this.playing = true;
-  } else {
-    clearInterval(loop);
-    this.playing = false;
+  // console.log(this.playing);
+  var _this = this;
+  function integerPrint() {
+    if( _this.i < _this.steps) {
+      _this.i++;
+      console.log("IF " + _this.i);
+    } else {
+      _this.i = 0;
+      _this.i++;
+      console.log("Else " + _this.i);
+    }
   }
+  console.log("Toggle Loop Playing: " + this.playing);
+  this.playing = true;
+  console.log("Toggle Loop Playing: " + this.playing);
+  this.loop = setInterval(integerPrint, 125);
 };
 
-Machine.prototype.integerPrint = function() {
-  console.log("Steps" + this.steps);
-  console.log("i" + this.i);
-  if( this.i < this.steps) {
-    this.i++;
-    console.log("IF" + this.i);
-  } else {
-    this.i = 0;
-    this.i++;
-    console.log("Else" + this.i);
-  }
+Machine.prototype.stopLoop = function() {
+  console.log("Stop Loop Playing: " + this.playing);
+  this.playing = false;
+  console.log("Stop Loop Playing: " + this.playing);
+  console.log(this.loop);
+  clearInterval(this.loop);
 };
 
 exports.MachineModule = Machine;
 
 },{}],2:[function(require,module,exports){
 var Machine = require('./../js/machine.js').MachineModule;
+var machine = new Machine();
 
 $(function() {
   $("#toggle").click(function() {
-    var machine = new Machine();
-    machine.toggleLoop();
+    if (machine.playing) {
+      machine.stopLoop();
+    } else {
+      machine.toggleLoop();
+    }
   });
 });
 

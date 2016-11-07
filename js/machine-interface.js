@@ -1,8 +1,12 @@
 var Machine = require('./../js/machine.js').MachineModule;
+var machine = new Machine();
 
 $(function() {
   $("#toggle").click(function() {
-    var machine = new Machine();
-    machine.toggleLoop();
+    if (machine.playing) {
+      machine.stopLoop();
+    } else {
+      machine.toggleLoop();
+    }
   });
 });
