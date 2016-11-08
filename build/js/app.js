@@ -72,10 +72,13 @@ $(function() {
   }
   $("#toggle").click(function() {
     if (machine.playing) {
-      machine.stopLoop();
     } else {
       machine.toggleLoop();
     }
+  });
+
+  $("#stopbutton").click(function() {
+    machine.stopLoop();
   });
 
   $("#tempobuttonup").click(function() {
