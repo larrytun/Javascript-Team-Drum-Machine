@@ -3,7 +3,7 @@ function Machine() {
   this.i = 0;
   this.playing = false;
   this.loop;
-  this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.boolArray = [false, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false];
   this.allSounds = [];
 }
 
@@ -20,18 +20,15 @@ Machine.prototype.createSounds = function(_sound){
 Machine.prototype.toggleLoop = function() {
   var _this = this;
   function metronome() {
-    if( _this.i < _this.steps) {
-      console.log(_this.i);
-      console.log(_this.allSounds[0][_this.i]);
-      for (var i = 0; i < _this.allSounds.length; i++) {
-          console.log();
-          _this.allSounds[i][_this.i].play();
-      }
-      _this.i++;
-    } else {
+    if( _this.i === _this.steps) {
       _this.i = 0;
-      _this.i++;
     }
+    for (var i = 0; i < _this.allSounds.length; i++) {
+      if (_this.boolArray[_this.i]) {
+        _this.allSounds[i][_this.i].play();
+      }
+    }
+    _this.i++;
   }
   this.playing = true;
   this.loop = setInterval(metronome, 125);
