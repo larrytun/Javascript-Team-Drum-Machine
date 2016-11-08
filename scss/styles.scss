@@ -6,6 +6,13 @@ h1 {
   margin-top: 270px;
 }
 
+h2{
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: white;
+}
+
 body{
   background-image: url("https://s-media-cache-ak0.pinimg.com/564x/18/29/c3/1829c3ee8226a88ee07c78e72a384d46.jpg");
   background-repeat: repeat;
@@ -94,102 +101,98 @@ body{
   margin-top: -4px;
 }
 
-#col1row1 {
+#instrument2 {
+  margin-left: -19px;
+  margin-top: 67px;
+}
+
+.row1 {
   margin-top: -70px;
+}
+
+.row2 {
+  margin-top: -70px;
+}
+
+.col1 {
   margin-left: 106px;
   position: absolute;
 }
 
-#col2row1 {
-  margin-top: -70px;
+.col2 {
   margin-left: 172px;
   position: absolute;
 }
 
-#col3row1 {
-  margin-top: -70px;
+.col3 {
   margin-left: 238px;
   position: absolute;
 }
 
-#col4row1 {
-  margin-top: -70px;
+.col4 {
   margin-left: 304px;
   position: absolute;
 }
 
-#col5row1 {
-  margin-top: -70px;
+.col5 {
   margin-left: 370px;
   position: absolute;
 }
 
-#col6row1 {
-  margin-top: -70px;
+.col6 {
   margin-left: 436px;
   position: absolute;
 }
 
-#col7row1 {
-  margin-top: -70px;
+.col7 {
   margin-left: 502px;
   position: absolute;
 }
 
-#col8row1 {
-  margin-top: -70px;
+.col8 {
   margin-left: 568px;
   position: absolute;
 }
 
-#col9row1 {
-  margin-top: -70px;
+.col9 {
   margin-left: 634px;
   position: absolute;
 }
 
-#col10row1 {
-  margin-top: -70px;
+.col10 {
   margin-left: 700px;
   position: absolute;
 }
 
-#col11row1 {
-  margin-top: -70px;
+.col11 {
   margin-left: 766px;
   position: absolute;
 }
 
-#col12row1 {
-  margin-top: -70px;
+.col12 {
   margin-left: 832px;
   position: absolute;
 }
 
-#col13row1 {
-  margin-top: -70px;
+.col13 {
   margin-left: 898px;
   position: absolute;
 }
 
-#col14row1 {
-  margin-top: -70px;
+.col14 {
   margin-left: 964px;
   position: absolute;
 }
 
-#col15row1 {
-  margin-top: -70px;
+.col15 {
   margin-left: 1030px;
   position: absolute;
 }
 
-#col16row1 {
-  margin-top: -70px;
+.col16 {
   margin-left: 1096px;
   position: absolute;
 }
-
 
 .step-unselected {
   width: 70px;
@@ -197,5 +200,16 @@ body{
   background-color: #B9DECA;
   border: solid #000;
   border-width: 4px;
+}
 
+.instrument-name{
+  float:left;
+  margin-top: -70px;
+  position: absolute;
+  width: 129px;
+  height: 70px;
+  background-color: #03467C;
+  border: solid #000;
+  border-width: 4px;
+  margin-left: -19px;
 }
