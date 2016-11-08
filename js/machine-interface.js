@@ -16,16 +16,6 @@ function createSounds(_sound){
 }
 
 
-
-
-
-
-
-
-
-
-
-
 $(function() {
   $("#bpm").text(machine.BPM + ' BPM');
   for (var i = 1; i <= machine.steps; i++) {
