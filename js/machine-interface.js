@@ -5,6 +5,8 @@ $(function() {
   for (var i = 1; i <= machine.steps; i++) {
     $(".row1").append('<div class="step-unselected col' +i+ '"></div>');
     $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
+    $(".row3").append('<div class="step-unselected col' +i+ '"></div>');
+    $(".row4").append('<div class="step-unselected col' +i+ '"></div>');
   }
   $("#toggle").click(function() {
     if (machine.playing) {
