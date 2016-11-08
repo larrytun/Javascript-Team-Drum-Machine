@@ -2,7 +2,7 @@
 
 #### _description, date_
 
-#### By _** Blake, Caleb, Jeremy, Larry**_
+#### By _** Blake Scala, Caleb Stevenson, Jeremy Fryd, Larry Tunseth**_
 
 ### Specs
 | Behavior                                             | Input | Output |
@@ -16,8 +16,6 @@
 | Program plays two different samples at the same time |       |        |
 | Program runs through multiple looped tracks          |       |        |
 
-## User Story
-
 ## Description
 
 ## Setup/Installation Requirements
@@ -25,11 +23,6 @@
 * _Clone this repository to your desktop_
 * _run npm install and bower install in the home directory_
 * _run all commands in the npm_commands.txt_
-
-## Behavior Driven Development
-
-|Behavior|Input|Output|
-|--------|:---:|-----:|
 
 ## Known Bugs
 
