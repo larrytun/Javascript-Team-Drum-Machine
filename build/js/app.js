@@ -117,9 +117,14 @@ $(function() {
   machine.allInstruments[1].toggleStep(15);
 
   $("#bpm").text(machine.BPM + ' BPM');
-  for (var i = 1; i <= 4; i++) {
+  for (var i = 1; i < 8+1; i++) {
     row = ".row" + i;
-    for (var j = 1; j <= machine.steps; j++) {
+    $("#track-area").append(
+      '<img src="public/img/instrument-display.png" id="instrument' + i + '"/>'
+    + '<div class="instrument-name"><h2>SOUND</h2></div>'
+    + '<div class="row'+ i + '"></div>');
+    for (var j = 1; j < machine.steps + 1; j++) {
+      console.log(row);
       $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
     }
 
