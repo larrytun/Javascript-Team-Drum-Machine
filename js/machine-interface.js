@@ -1,4 +1,6 @@
 var Machine = require('./../js/machine.js').MachineModule;
+var Instrument = require('./../js/instrument.js').InstrumentModule;
+
 var machine = new Machine();
 
 var allSounds = [];
@@ -16,8 +18,16 @@ function createSounds(_sound){
 }
 
 $(function() {
-  machine.createSounds("bass1");
-  machine.createSounds("cymbal1");
+  machine.addInstrument("bass2");
+  machine.addInstrument("cymbal1");
+  machine.allInstruments[0].toggleStep(0);
+  machine.allInstruments[0].toggleStep(4);
+  machine.allInstruments[0].toggleStep(8);
+  machine.allInstruments[0].toggleStep(12);
+  machine.allInstruments[1].toggleStep(3);
+  machine.allInstruments[1].toggleStep(7);
+  machine.allInstruments[1].toggleStep(11);
+
   $("#bpm").text(machine.BPM + ' BPM');
   for (var i = 1; i < 5+1; i++) {
     row = ".row" + i;

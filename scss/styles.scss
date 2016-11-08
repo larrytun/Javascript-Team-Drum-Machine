@@ -62,10 +62,22 @@ body{
   margin-left: 94.73px;
 }
 
+#tempobuttondn:active {
+  height: 65px;
+  margin-top: 560.25px;
+  margin-left: 94.73px;
+}
+
 #tempobuttonup {
   float: left;
   position: absolute;
   margin-top: 555.25px;
+  margin-left: 168.2px;
+}
+
+#tempobuttonup:active {
+  height: 65px;
+  margin-top: 560.25px;
   margin-left: 168.2px;
 }
 
@@ -79,10 +91,26 @@ body{
   outline: none;
 }
 
-#stopbutton:hover, #tempobuttonup:hover, #tempobuttondn:hover, #toggle:hover {
-  opacity: 0.5;
+#toggle:active {
+  width: 65px;
+  margin-top: 494.56px;
+  margin-left: 310.44px;
 }
 
+
+
+#stopbutton:hover, #tempobuttonup:hover, #tempobuttondn:hover, #toggle:hover {
+  opacity: 0.6;
+}
+
+<<<<<<< HEAD
+
+#stopbutton {
+  float: left;
+  position: absolute;
+  margin-top: 611px;
+  margin-left: 336px;
+=======
 #round-bar {
     float: left;
     position: absolute;
@@ -102,13 +130,13 @@ body{
     position: absolute;
     margin-top: 554px;
     margin-left: 430px;
+>>>>>>> master
 }
 
-#stopbutton {
-  float: left;
-  position: absolute;
-  margin-top: 611px;
-  margin-left: 336px;
+#stopbutton:active {
+  width: 90px;
+  margin-top: 620px;
+  margin-left: 340px;
 }
 
 #instrument1 {
