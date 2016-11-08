@@ -1,21 +1,17 @@
+var Instrument = require('./../js/instrument.js').InstrumentModule;
+
 function Machine() {
   this.steps = 16;
   this.i = 0;
   this.playing = false;
   this.loop;
-  this.boolArray = [false, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false];
-  this.allSounds = [];
+  this.allInstruments = [];
   this.BPM = 120;
 }
 
-Machine.prototype.createSounds = function(_sound){
-  var soundArray = [];
-  for (var i = 0; i < 16; i++) {
-    $("#sounds").append("<audio src='public/sounds/" + _sound + ".WAV' id='" + _sound + i + "' controls></audio>");
-    var sound = document.getElementById(_sound + i);
-    soundArray.push(sound);
-  }
-  this.allSounds.push(soundArray);
+Machine.prototype.addInstrument = function(instrumentName) {
+  var instrument = new Instrument(instrumentName);
+  this.allInstruments.push(instrument);
 };
 
 Machine.prototype.getNoteDuration = function() {
@@ -31,28 +27,22 @@ Machine.prototype.toggleLoop = function() {
     if( _this.i === _this.steps) {
       _this.i = 0;
     }
-    for (var i = 0; i < _this.allSounds.length; i++) {
-      if (_this.boolArray[_this.i]) {
-        _this.allSounds[i][_this.i].play();
+    for (var i = 0; i < _this.allInstruments.length; i++) {
+      if (_this.allInstruments[i].boolArray[_this.i]) {
+        // console.log(_this.allInstruments[i].soundArray);
+        _this.allInstruments[i].soundArray[_this.i].play();
       }
     }
     _this.i++;
+    // this.getNoteDuration();
   }
   this.playing = true;
-  this.loop = setInterval(metronome, _this.getNoteDuration());
+  this.loop = setInterval(metronome, this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
   this.playing = false;
   clearInterval(this.loop);
-};
-
-Machine.prototype.toggleStep = function(index) {
-  if (this.boolArray[index]) {
-    this.boolArray[index] = false;
-  } else {
-    this.boolArray[index] = true;
-  }
 };
 
 Machine.prototype.addBPM = function() {
@@ -66,5 +56,3 @@ Machine.prototype.subtractBPM = function() {
 exports.MachineModule = Machine;
 
 //Front-End Emulation
-var machine = new Machine();
-machine.toggleStep(1);

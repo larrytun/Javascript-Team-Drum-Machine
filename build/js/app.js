@@ -1,22 +1,44 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+function Instrument(sound) {
+  this.sound = sound;
+  this.soundArray = [];
+  this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.generateSounds(sound);
+}
+
+Instrument.prototype.generateSounds = function(thisSound) {
+  for (var i = 0; i < 16; i++) {
+    $("#sounds").append("<audio src='public/sounds/" + this.sound + ".WAV' id='" + this.sound + i + "' controls></audio>");
+    var sound = document.getElementById(this.sound + i);
+    this.soundArray.push(sound);
+  }
+};
+
+Instrument.prototype.toggleStep = function(index) {
+  if (this.boolArray[index]) {
+    this.boolArray[index] = false;
+  } else {
+    this.boolArray[index] = true;
+  }
+};
+
+exports.InstrumentModule = Instrument;
+
+},{}],2:[function(require,module,exports){
+var Instrument = require('./../js/instrument.js').InstrumentModule;
+
 function Machine() {
   this.steps = 16;
   this.i = 0;
   this.playing = false;
   this.loop;
-  this.boolArray = [false, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false];
-  this.allSounds = [];
+  this.allInstruments = [];
   this.BPM = 120;
 }
 
-Machine.prototype.createSounds = function(_sound){
-  var soundArray = [];
-  for (var i = 0; i < 16; i++) {
-    $("#sounds").append("<audio src='public/sounds/" + _sound + ".WAV' id='" + _sound + i + "' controls></audio>");
-    var sound = document.getElementById(_sound + i);
-    soundArray.push(sound);
-  }
-  this.allSounds.push(soundArray);
+Machine.prototype.addInstrument = function(instrumentName) {
+  var instrument = new Instrument(instrumentName);
+  this.allInstruments.push(instrument);
 };
 
 Machine.prototype.getNoteDuration = function() {
@@ -32,28 +54,22 @@ Machine.prototype.toggleLoop = function() {
     if( _this.i === _this.steps) {
       _this.i = 0;
     }
-    for (var i = 0; i < _this.allSounds.length; i++) {
-      if (_this.boolArray[_this.i]) {
-        _this.allSounds[i][_this.i].play();
+    for (var i = 0; i < _this.allInstruments.length; i++) {
+      if (_this.allInstruments[i].boolArray[_this.i]) {
+        // console.log(_this.allInstruments[i].soundArray);
+        _this.allInstruments[i].soundArray[_this.i].play();
       }
     }
     _this.i++;
+    // this.getNoteDuration();
   }
   this.playing = true;
-  this.loop = setInterval(metronome, _this.getNoteDuration());
+  this.loop = setInterval(metronome, this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
   this.playing = false;
   clearInterval(this.loop);
-};
-
-Machine.prototype.toggleStep = function(index) {
-  if (this.boolArray[index]) {
-    this.boolArray[index] = false;
-  } else {
-    this.boolArray[index] = true;
-  }
 };
 
 Machine.prototype.addBPM = function() {
@@ -67,16 +83,24 @@ Machine.prototype.subtractBPM = function() {
 exports.MachineModule = Machine;
 
 //Front-End Emulation
-var machine = new Machine();
-machine.toggleStep(1);
 
-},{}],2:[function(require,module,exports){
+},{"./../js/instrument.js":1}],3:[function(require,module,exports){
 var Machine = require('./../js/machine.js').MachineModule;
+var Instrument = require('./../js/instrument.js').InstrumentModule;
+
 var machine = new Machine();
 
 $(function() {
-  machine.createSounds("bass1");
-  machine.createSounds("cymbal1");
+  machine.addInstrument("bass2");
+  machine.addInstrument("cymbal1");
+  machine.allInstruments[0].toggleStep(0);
+  machine.allInstruments[0].toggleStep(4);
+  machine.allInstruments[0].toggleStep(8);
+  machine.allInstruments[0].toggleStep(12);
+  machine.allInstruments[1].toggleStep(3);
+  machine.allInstruments[1].toggleStep(7);
+  machine.allInstruments[1].toggleStep(11);
+
   $("#bpm").text(machine.BPM + ' BPM');
   for (var i = 1; i <= machine.steps; i++) {
     $(".row1").append('<div class="step-unselected col' +i+ '"></div>');
@@ -103,4 +127,4 @@ $(function() {
   });
 });
 
-},{"./../js/machine.js":1}]},{},[2]);
+},{"./../js/instrument.js":1,"./../js/machine.js":2}]},{},[3]);
