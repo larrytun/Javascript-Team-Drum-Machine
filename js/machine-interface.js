@@ -27,18 +27,16 @@ $(function() {
   machine.allInstruments[1].toggleStep(3);
   machine.allInstruments[1].toggleStep(7);
   machine.allInstruments[1].toggleStep(11);
+  machine.allInstruments[1].toggleStep(15);
 
   $("#bpm").text(machine.BPM + ' BPM');
-  for (var i = 1; i < 5+1; i++) {
+  for (var i = 1; i <= 4; i++) {
     row = ".row" + i;
-    for (var j = 1; j < machine.steps + 1; j++) {
-      console.log(row);
-      $(row).append('<div class="step-unselected col' +j+ '"></div>');
+    for (var j = 1; j <= machine.steps; j++) {
+      $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
     }
 
-    // $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
-    // $(".row3").append('<div class="step-unselected col' +i+ '"></div>');
-    // $(".row4").append('<div class="step-unselected col' +i+ '"></div>');
+
   }
   $("#toggle").click(function() {
     if (machine.playing) {
