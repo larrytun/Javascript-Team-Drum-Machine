@@ -1,9 +1,10 @@
 h1 {
-  font-family: 'Archivo Black', sans-serif;
-  color: #001018;
+  font-family: 'Catamaran', sans-serif;
+  color: #000F27;
   font-size: 150px;
   text-align: center;
   margin-top: 270px;
+  font-weight: 900;
 }
 
 h2{
@@ -82,11 +83,25 @@ body{
   opacity: 0.5;
 }
 
-#stopbutton {
-  float: left;
-  position: absolute;
-  margin-top: 611px;
-  margin-left: 336px;
+#round-bar {
+    float: left;
+    position: absolute;
+    margin-top: 374px;
+    margin-left: 76px;
+}
+
+#little-circle {
+    float: left;
+    position: absolute;
+    margin-top: 372px;
+    margin-left: 367px;
+}
+
+#little-green-circle {
+    float: left;
+    position: absolute;
+    margin-top: 554px;
+    margin-left: 430px;
 }
 
 #stopbutton {
@@ -139,6 +154,9 @@ body{
 }
 
 .row4 {
+  margin-top: -70px;
+}
+.row5 {
   margin-top: -70px;
 }
 

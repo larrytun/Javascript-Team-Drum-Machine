@@ -15,33 +15,27 @@ function createSounds(_sound){
   console.log(allSounds);
 }
 
-
-
-
-
-
-
-
-
-
-
-
 $(function() {
+  machine.createSounds("bass1");
+  machine.createSounds("cymbal1");
   $("#bpm").text(machine.BPM + ' BPM');
-  for (var i = 1; i <= machine.steps; i++) {
-    $(".row1").append('<div class="step-unselected col' +i+ '"></div>');
-    $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
-    $(".row3").append('<div class="step-unselected col' +i+ '"></div>');
-    $(".row4").append('<div class="step-unselected col' +i+ '"></div>');
+  for (var i = 1; i < 5+1; i++) {
+    row = ".row" + i;
+    for (var j = 1; j < machine.steps + 1; j++) {
+      console.log(row);
+      $(row).append('<div class="step-unselected col' +j+ '"></div>');
+    }
+
+    // $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
+    // $(".row3").append('<div class="step-unselected col' +i+ '"></div>');
+    // $(".row4").append('<div class="step-unselected col' +i+ '"></div>');
   }
   $("#toggle").click(function() {
-    createSounds("bass1");
-    //
-    // if (machine.playing) {
-    //   machine.stopLoop();
-    // } else {
-    //   machine.toggleLoop();
-    // }
+    if (machine.playing) {
+      machine.stopLoop();
+    } else {
+      machine.toggleLoop();
+    }
   });
 
   $("#tempobuttonup").click(function() {
