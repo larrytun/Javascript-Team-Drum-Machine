@@ -4,7 +4,15 @@ function Machine() {
   this.playing = false;
   this.loop;
   this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.BPM = 120;
 }
+
+Machine.prototype.getNoteDuration = function() {
+  var ms = 60000/this.BPM;
+  var s = ms * 4;
+  var noteDuration = s/16;
+  return noteDuration;
+};
 
 Machine.prototype.toggleLoop = function() {
   var _this = this;
@@ -19,7 +27,7 @@ Machine.prototype.toggleLoop = function() {
     }
   }
   this.playing = true;
-  this.loop = setInterval(metronome, 125);
+  this.loop = setInterval(metronome, _this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
@@ -34,6 +42,14 @@ Machine.prototype.toggleStep = function(index) {
     this.boolArray[index] = true;
   }
 };
+
+Machine.prototype.addBPM = function() {
+  this.BPM += 1;
+}
+
+Machine.prototype.subtractBPM = function() {
+  this.BPM--;
+}
 
 exports.MachineModule = Machine;
 

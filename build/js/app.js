@@ -5,7 +5,15 @@ function Machine() {
   this.playing = false;
   this.loop;
   this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.BPM = 120;
 }
+
+Machine.prototype.getNoteDuration = function() {
+  var ms = 60000/this.BPM;
+  var s = ms * 4;
+  var noteDuration = s/16;
+  return noteDuration;
+};
 
 Machine.prototype.toggleLoop = function() {
   var _this = this;
@@ -20,7 +28,7 @@ Machine.prototype.toggleLoop = function() {
     }
   }
   this.playing = true;
-  this.loop = setInterval(metronome, 125);
+  this.loop = setInterval(metronome, _this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
@@ -36,6 +44,14 @@ Machine.prototype.toggleStep = function(index) {
   }
 };
 
+Machine.prototype.addBPM = function() {
+  this.BPM += 1;
+}
+
+Machine.prototype.subtractBPM = function() {
+  this.BPM--;
+}
+
 exports.MachineModule = Machine;
 
 //Front-End Emulation
@@ -47,6 +63,7 @@ var Machine = require('./../js/machine.js').MachineModule;
 var machine = new Machine();
 
 $(function() {
+  $("#bpm").text(machine.BPM + ' BPM');
   for (var i = 1; i <= machine.steps; i++) {
     $(".row1").append('<div class="step-unselected col' +i+ '"></div>');
     $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
@@ -59,6 +76,16 @@ $(function() {
     } else {
       machine.toggleLoop();
     }
+  });
+
+  $("#tempobuttonup").click(function() {
+    machine.addBPM();
+    $("#bpm").text(machine.BPM + ' BPM');
+  });
+
+  $("#tempobuttondn").click(function() {
+    machine.subtractBPM();
+    $("#bpm").text(machine.BPM + ' BPM');
   });
 });
 
