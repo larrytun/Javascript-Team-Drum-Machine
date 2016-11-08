@@ -16,6 +16,7 @@ h2{
 body{
   background-image: url("https://s-media-cache-ak0.pinimg.com/564x/18/29/c3/1829c3ee8226a88ee07c78e72a384d46.jpg");
   background-repeat: repeat;
+  cursor: url('http://www.cursor.cc/cursor/563/51/cursor.png'), default;
 }
 
 #BMO {
@@ -80,7 +81,6 @@ body{
 #stopbutton:hover, #tempobuttonup:hover, #tempobuttondn:hover, #toggle:hover {
   opacity: 0.5;
 }
-
 
 #stopbutton {
   float: left;
