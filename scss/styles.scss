@@ -103,14 +103,15 @@ body{
   opacity: 0.6;
 }
 
-<<<<<<< HEAD
+
 
 #stopbutton {
   float: left;
   position: absolute;
   margin-top: 611px;
   margin-left: 336px;
-=======
+}
+
 #round-bar {
     float: left;
     position: absolute;
@@ -130,7 +131,6 @@ body{
     position: absolute;
     margin-top: 554px;
     margin-left: 430px;
->>>>>>> master
 }
 
 #stopbutton:active {
@@ -155,6 +155,11 @@ body{
 }
 
 #instrument4 {
+  margin-left: -19px;
+  margin-top: 66px;
+}
+
+#instrument5, #instrument6, #instrument7, #instrument8 {
   margin-left: -19px;
   margin-top: 66px;
 }
@@ -184,7 +189,8 @@ body{
 .row4 {
   margin-top: -70px;
 }
-.row5 {
+
+.row5, .row6, .row7, .row8 {
   margin-top: -70px;
 }
 
