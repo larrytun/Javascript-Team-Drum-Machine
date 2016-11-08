@@ -19,8 +19,12 @@ $(function() {
   machine.createSounds("bass1");
   machine.createSounds("cymbal1");
   $("#bpm").text(machine.BPM + ' BPM');
-  for (var i = 1; i < 5+1; i++) {
+  for (var i = 1; i < 8+1; i++) {
     row = ".row" + i;
+    $("#track-area").append(
+      '<img src="public/img/instrument-display.png" id="instrument' + i + '"/>'
+    + '<div class="instrument-name"><h2>SOUND</h2></div>'
+    + '<div class="row'+ i + '"></div>');
     for (var j = 1; j < machine.steps + 1; j++) {
       console.log(row);
       $(row).append('<div class="step-unselected col' +j+ '"></div>');
