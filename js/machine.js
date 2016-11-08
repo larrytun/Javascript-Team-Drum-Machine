@@ -5,6 +5,7 @@ function Machine() {
   this.loop;
   this.boolArray = [false, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false];
   this.allSounds = [];
+  this.BPM = 120;
 }
 
 Machine.prototype.createSounds = function(_sound){
@@ -15,6 +16,13 @@ Machine.prototype.createSounds = function(_sound){
     soundArray.push(sound);
   }
   this.allSounds.push(soundArray);
+};
+
+Machine.prototype.getNoteDuration = function() {
+  var ms = 60000/this.BPM;
+  var s = ms * 4;
+  var noteDuration = s/16;
+  return noteDuration;
 };
 
 Machine.prototype.toggleLoop = function() {
@@ -31,7 +39,7 @@ Machine.prototype.toggleLoop = function() {
     _this.i++;
   }
   this.playing = true;
-  this.loop = setInterval(metronome, 125);
+  this.loop = setInterval(metronome, _this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
@@ -45,6 +53,14 @@ Machine.prototype.toggleStep = function(index) {
   } else {
     this.boolArray[index] = true;
   }
+};
+
+Machine.prototype.addBPM = function() {
+  this.BPM += 1;
+};
+
+Machine.prototype.subtractBPM = function() {
+  this.BPM--;
 };
 
 exports.MachineModule = Machine;

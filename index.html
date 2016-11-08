@@ -2,7 +2,8 @@
 <html>
   <head>
     <link rel="icon" href="http://images.clipartpanda.com/musical-notes-png-free-vector-musical-note-3-dennis-b-01r_101219_musical_note_3_dennis_b_01r.png">
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
     <link rel="stylesheet" href="build/css/vendor.css">
     <link rel="stylesheet" href="build/css/styles.css">
     <script src="build/js/vendor.min.js"></script>
@@ -12,35 +13,28 @@
   <body>
     <div id="drum-body" class="container">
       <img src="public/img/BMOBLANK.png"  id="BMO" alt="" />
-      <button id="toggle"><img src="public/img/play.png" id="playbutton" alt="" /></button>
+      <img src="public/img/play.png" id="toggle" alt="" />
       <img src="public/img/stop.png" id="stopbutton" alt="" />
       <img src="public/img/tempo-button-up.png" id="tempobuttonup" alt="" />
       <img src="public/img/tempo-button-down.png" id="tempobuttondn" alt="" />
-      <img src="public/img/tempodisplay.png" id="tempodisplay" alt="" />
+      <div class="tempo">
+        <img src="public/img/tempodisplay.png" id="tempodisplay" alt="" />
+        <h6 id="bpm"></h6>
+      </div>
 
       <div class="container" id="track-area">
         <img src="public/img/instrument-display.png" id="instrument1" alt="" />
-        <div id="steps">
-
-        </div>
-        <!-- <div class="step-unselected" id="col1row1"></div>
-        <div class="step-unselected" id="col2row1"></div>
-        <div class="step-unselected" id="col3row1"></div>
-        <div class="step-unselected" id="col4row1"></div>
-        <div class="step-unselected" id="col5row1"></div>
-        <div class="step-unselected" id="col6row1"></div>
-        <div class="step-unselected" id="col7row1"></div>
-        <div class="step-unselected" id="col8row1"></div>
-        <div class="step-unselected" id="col9row1"></div>
-        <div class="step-unselected" id="col10row1"></div>
-        <div class="step-unselected" id="col11row1"></div>
-        <div class="step-unselected" id="col12row1"></div>
-        <div class="step-unselected" id="col13row1"></div>
-        <div class="step-unselected" id="col14row1"></div>
-        <div class="step-unselected" id="col15row1"></div>
-        <div class="step-unselected" id="col16row1"></div> -->
-
-
+        <div class="instrument-name"><h2>KICK</h2></div>
+        <div class="row1"></div>
+        <img src="public/img/instrument-display.png" id="instrument2" alt="" />
+        <div class="instrument-name"><h2>SNARE</h2></div>
+        <div class="row2"></div>
+        <img src="public/img/instrument-display.png" id="instrument3" alt="" />
+        <div class="instrument-name"><h2>HIHAT</h2></div>
+        <div class="row3"></div>
+        <img src="public/img/instrument-display.png" id="instrument4" alt="" />
+        <div class="instrument-name"><h2>CRASH</h2></div>
+        <div class="row4"></div>
         <h1>BMO<h1>
       </div>
 

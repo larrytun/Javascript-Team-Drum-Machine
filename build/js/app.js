@@ -6,6 +6,7 @@ function Machine() {
   this.loop;
   this.boolArray = [false, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false];
   this.allSounds = [];
+  this.BPM = 120;
 }
 
 Machine.prototype.createSounds = function(_sound){
@@ -16,6 +17,13 @@ Machine.prototype.createSounds = function(_sound){
     soundArray.push(sound);
   }
   this.allSounds.push(soundArray);
+};
+
+Machine.prototype.getNoteDuration = function() {
+  var ms = 60000/this.BPM;
+  var s = ms * 4;
+  var noteDuration = s/16;
+  return noteDuration;
 };
 
 Machine.prototype.toggleLoop = function() {
@@ -32,7 +40,7 @@ Machine.prototype.toggleLoop = function() {
     _this.i++;
   }
   this.playing = true;
-  this.loop = setInterval(metronome, 125);
+  this.loop = setInterval(metronome, _this.getNoteDuration());
 };
 
 Machine.prototype.stopLoop = function() {
@@ -48,6 +56,14 @@ Machine.prototype.toggleStep = function(index) {
   }
 };
 
+Machine.prototype.addBPM = function() {
+  this.BPM += 1;
+};
+
+Machine.prototype.subtractBPM = function() {
+  this.BPM--;
+};
+
 exports.MachineModule = Machine;
 
 //Front-End Emulation
@@ -61,8 +77,12 @@ var machine = new Machine();
 $(function() {
   machine.createSounds("bass1");
   machine.createSounds("cymbal1");
+  $("#bpm").text(machine.BPM + ' BPM');
   for (var i = 1; i <= machine.steps; i++) {
-    $("#steps").append('<div class="step-unselected" id="col' + i + 'row1"></div>');
+    $(".row1").append('<div class="step-unselected col' +i+ '"></div>');
+    $(".row2").append('<div class="step-unselected col' +i+ '"></div>');
+    $(".row3").append('<div class="step-unselected col' +i+ '"></div>');
+    $(".row4").append('<div class="step-unselected col' +i+ '"></div>');
   }
   $("#toggle").click(function() {
     if (machine.playing) {
@@ -70,6 +90,16 @@ $(function() {
     } else {
       machine.toggleLoop();
     }
+  });
+
+  $("#tempobuttonup").click(function() {
+    machine.addBPM();
+    $("#bpm").text(machine.BPM + ' BPM');
+  });
+
+  $("#tempobuttondn").click(function() {
+    machine.subtractBPM();
+    $("#bpm").text(machine.BPM + ' BPM');
   });
 });
 
