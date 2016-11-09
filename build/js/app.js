@@ -131,7 +131,7 @@ $(function() {
     row = ".row" + i;
     $("#track-area").append(
       '<img src="public/img/instrument-display.png" id="instrument' + i + '"/>' +
-    '<div class="instrument-name"><h2>' + machine.allInstruments[i-1].displayName + '</h2></div>' +
+    '<div class="instrument-name"><div id="displayName"><h2 id="displayN">' + machine.allInstruments[i-1].displayName + '</h2></div></div>' +
     '<div class="row'+ i + '"></div>');
     for (var j = 1; j < machine.steps + 1; j++) {
       $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
