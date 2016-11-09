@@ -203,6 +203,19 @@ body{
 #displayN {
   font-size: medium;
 }
+
+#frown {
+  float: left;
+  position: absolute;
+  width: 12%;
+}
+
+.frown-face {
+  float: left;
+  background-color: #B9DFCA;
+  border: 2px solid black;
+}
+
 .row1 {
   margin-top: -70px;
 }
