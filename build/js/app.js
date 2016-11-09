@@ -33,7 +33,7 @@ function Machine() {
   this.playing = false;
   this.loop;
   this.allInstruments = [];
-  this.BPM = 120;
+  this.Bpm = 120;
 }
 
 Machine.prototype.addInstrument = function(instrumentName) {
@@ -42,7 +42,7 @@ Machine.prototype.addInstrument = function(instrumentName) {
 };
 
 Machine.prototype.getNoteDuration = function() {
-  var ms = 60000/this.BPM;
+  var ms = 60000/this.Bpm;
   var s = ms * 4;
   var noteDuration = s/16;
   return noteDuration;
@@ -72,13 +72,18 @@ Machine.prototype.stopLoop = function() {
   clearInterval(this.loop);
 };
 
-Machine.prototype.addBPM = function() {
-  this.BPM += 1;
+Machine.prototype.addBpm = function() {
+  this.Bpm += 1;
 };
 
-Machine.prototype.subtractBPM = function() {
-  this.BPM--;
+Machine.prototype.subtractBpm = function() {
+  this.Bpm--;
 };
+
+Machine.prototype.setBpm = function(newBpm) {
+  console.log("bpm " + newBpm);
+  this.Bpm = newBpm;
+}
 
 exports.MachineModule = Machine;
 
@@ -116,7 +121,7 @@ $(function() {
   machine.addInstrument("MA");
   machine.addInstrument("HC10");
 
-  $("#bpm").text(machine.BPM + ' BPM');
+  $("#bpm").text(machine.Bpm + ' BPM');
 
   var rows = machine.allInstruments.length;
   var cols = 16;
@@ -133,11 +138,8 @@ $(function() {
     }
   }
 
-
-
-
-console.log(rows);
-console.log(cols);
+  console.log(rows);
+  console.log(cols);
   for (var p = 1; p <= rows; p++){
     for (var q = 1; q <= cols; q++) {
       $("#row" + p + "col" + q).click(selectStep(p, q));
@@ -153,17 +155,39 @@ console.log(cols);
   });
 
   $("#tempobuttonup").click(function() {
-    machine.addBPM();
-    $("#bpm").text(machine.BPM + ' BPM');
+    machine.addBpm();
+    $("#bpm").text(machine.Bpm + ' BPM');
   });
 
   $("#tempobuttondn").click(function() {
-    machine.subtractBPM();
-    $("#bpm").text(machine.BPM + ' BPM');
+    machine.subtractBpm();
+    $("#bpm").text(machine.Bpm + ' BPM');
   });
 
+  $("#tempodisplay").click(function() {
+    $("#bpmEntry").show();
+  });
 
+  $("#bpm").click(function() {
+    $("#bpmEntry").show();
+  });
 
+  $("#bpmEntry").click(function() {
+    $("#bpmEntry").show();
+  });
+
+  $('#bpmEntry').keypress(function(e){
+        if(e.keyCode==13)
+        $('#submit').click();
+      });
+
+  $("#bpmForm").submit(function() {
+    event.preventDefault();
+    var newBpm = parseInt($("#bpmEntry").val());
+    machine.setBpm(newBpm);
+    $("#bpmEntry").hide();
+    $("#bpm").text(machine.Bpm + ' BPM');
+  });
 });
 
 },{"./../js/instrument.js":1,"./../js/machine.js":2}]},{},[3]);
