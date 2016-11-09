@@ -28,6 +28,10 @@ function selectStep(p, q){
 $(function() {
   machine.addInstrument("bass2");
   machine.addInstrument("cymbal1");
+  machine.addInstrument("CB");
+  machine.addInstrument("LTAD7");
+  machine.addInstrument("OPCL2");
+  machine.addInstrument("RIDED8");
 
   $("#bpm").text(machine.BPM + ' BPM');
 

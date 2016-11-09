@@ -33,6 +33,14 @@ Machine.prototype.toggleLoop = function() {
         _this.allInstruments[i].soundArray[_this.i].play();
       }
     }
+      // MAKE THIS A CALLBACK FUNCTION
+    $(".col" + (_this.i+1)).addClass("col-beat");
+    $(".col" + _this.i).removeClass("col-beat");
+    if (_this.i===0) {
+      $(".col" + (16)).removeClass("col-beat");
+    }
+
+
     _this.i++;
     // this.getNoteDuration();
   }
