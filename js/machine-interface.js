@@ -107,6 +107,9 @@ $(function() {
       $("#bpm").text(machine.Bpm + ' BPM');
       $(".speech-bubble").hide();
       $(".speechText").hide();
+      if (!(machine.playing)) {
+        $('.frown').show();
+      }
     } else {
       $('.frown').hide();
       $(".speech-bubble").show();
