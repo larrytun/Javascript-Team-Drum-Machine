@@ -98,8 +98,10 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    machine.setBpm(newBpm);
-    $("#bpmEntry").hide();
-    $("#bpm").text(machine.Bpm + ' BPM');
+    if (!(isNaN(newBpm))) {
+      machine.setBpm(newBpm);
+      $("#bpmEntry").hide();
+      $("#bpm").text(machine.Bpm + ' BPM');
+    }
   });
 });

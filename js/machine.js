@@ -56,7 +56,7 @@ Machine.prototype.subtractBpm = function() {
 Machine.prototype.setBpm = function(newBpm) {
   console.log("bpm " + newBpm);
   this.Bpm = newBpm;
-}
+};
 
 exports.MachineModule = Machine;
 

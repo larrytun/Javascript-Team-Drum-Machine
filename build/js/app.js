@@ -84,7 +84,7 @@ Machine.prototype.subtractBpm = function() {
 Machine.prototype.setBpm = function(newBpm) {
   console.log("bpm " + newBpm);
   this.Bpm = newBpm;
-}
+};
 
 exports.MachineModule = Machine;
 
@@ -191,9 +191,11 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    machine.setBpm(newBpm);
-    $("#bpmEntry").hide();
-    $("#bpm").text(machine.Bpm + ' BPM');
+    if (!(isNaN(newBpm))) {
+      machine.setBpm(newBpm);
+      $("#bpmEntry").hide();
+      $("#bpm").text(machine.Bpm + ' BPM');
+    }
   });
 });
 
