@@ -191,10 +191,13 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    if (!(isNaN(newBpm))) {
+    if (!(isNaN(newBpm)) &&  newBpm < 220) {
       machine.setBpm(newBpm);
       $("#bpmEntry").hide();
       $("#bpm").text(machine.Bpm + ' BPM');
+    }
+    if (newBpm > 220) {
+      
     }
   });
 });
