@@ -2,7 +2,7 @@ var Machine = require('./../js/machine.js').MachineModule;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 var machine = new Machine();
-var savedBeats;
+var savedBeats = [];
 
 function selectStep(p, q){
   return function(){
@@ -46,8 +46,6 @@ $(function() {
     }
   }
 
-  console.log(rows);
-  console.log(cols);
   for (var p = 1; p <= rows; p++){
     for (var q = 1; q <= cols; q++) {
       $("#row" + p + "col" + q).click(selectStep(p, q));
@@ -100,21 +98,27 @@ $(function() {
   $("#save-form").submit(function(){
     event.preventDefault();
     var songName = $("#track-name").val();
+    var producerName = $("#producer-name").val();
     $("#track-name").val("");
+    $("#producer-name").val("");
     machine.name = songName;
+    machine.producer = producerName;
     // WRITE TO FIREBASE
     var beatsRef = firebase.database().ref('beats');
     beatsRef.push(machine);
     // READ FROM FIREBASE
     beatsRef.once('value').then(function(snapshot){
-      savedBeats = JSON.parse(JSON.stringify(snapshot.val()));
-      console.log(savedBeats);
-    }).then(function(){
-      for (var i = 0; i < savedBeats.length; i++) {
-        $(".tracks-list").append(savedBeats[i].name);
-      }
+      var databaseBeats = JSON.parse(JSON.stringify(snapshot.val()));
+      savedBeats = [];
+      Object.keys(databaseBeats).forEach(function(key) {
+        savedBeats.push(databaseBeats[key]);
+      });
+      $(".tracks-list").html("");
+      savedBeats.forEach(function(beat){
+        console.log(beat);
+        $(".tracks-list").append("<li>" + beat.name + " by: <em>" + beat.producer + "</em></li>");
+      });
     });
-
   });
 
 });
