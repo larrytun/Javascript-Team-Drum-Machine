@@ -1,6 +1,9 @@
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 function Machine() {
+  this.id;
+  this.name;
+  this.producer;
   this.steps = 16;
   this.i = 0;
   this.playing = false;
