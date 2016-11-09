@@ -9,8 +9,8 @@ function Machine() {
   this.Bpm = 120;
 }
 
-Machine.prototype.addInstrument = function(instrumentName) {
-  var instrument = new Instrument(instrumentName);
+Machine.prototype.addInstrument = function(sound, instrumentName) {
+  var instrument = new Instrument(sound, instrumentName);
   this.allInstruments.push(instrument);
 };
 
