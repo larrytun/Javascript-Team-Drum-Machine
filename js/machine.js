@@ -6,7 +6,7 @@ function Machine() {
   this.playing = false;
   this.loop;
   this.allInstruments = [];
-  this.BPM = 120;
+  this.Bpm = 120;
 }
 
 Machine.prototype.addInstrument = function(instrumentName) {
@@ -15,7 +15,7 @@ Machine.prototype.addInstrument = function(instrumentName) {
 };
 
 Machine.prototype.getNoteDuration = function() {
-  var ms = 60000/this.BPM;
+  var ms = 60000/this.Bpm;
   var s = ms * 4;
   var noteDuration = s/16;
   return noteDuration;
@@ -53,13 +53,18 @@ Machine.prototype.stopLoop = function() {
   clearInterval(this.loop);
 };
 
-Machine.prototype.addBPM = function() {
-  this.BPM += 1;
+Machine.prototype.addBpm = function() {
+  this.Bpm += 1;
 };
 
-Machine.prototype.subtractBPM = function() {
-  this.BPM--;
+Machine.prototype.subtractBpm = function() {
+  this.Bpm--;
 };
+
+Machine.prototype.setBpm = function(newBpm) {
+  console.log("bpm " + newBpm);
+  this.Bpm = newBpm;
+}
 
 exports.MachineModule = Machine;
 

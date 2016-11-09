@@ -5,8 +5,6 @@ var machine = new Machine();
 
 var allSounds = [];
 
-
-
 function createSounds(_sound){
   var soundArray = [];
   for (var i = 0; i < 16; i++) {
@@ -33,7 +31,7 @@ $(function() {
   machine.addInstrument("OPCL2");
   machine.addInstrument("RIDED8");
 
-  $("#bpm").text(machine.BPM + ' BPM');
+  $("#bpm").text(machine.Bpm + ' BPM');
 
   var rows = machine.allInstruments.length;
   var cols = 16;
@@ -50,14 +48,8 @@ $(function() {
     }
   }
 
-
-
-
-
   for (var p = 1; p < rows+1; p++){
     for (var q = 1; q < cols+1; q++) {
-      console.log(p);
-      console.log(q);
       $("#row" + p + "col" + q).click(selectStep(p, q));
     }
   }
@@ -71,15 +63,37 @@ $(function() {
   });
 
   $("#tempobuttonup").click(function() {
-    machine.addBPM();
-    $("#bpm").text(machine.BPM + ' BPM');
+    machine.addBpm();
+    $("#bpm").text(machine.Bpm + ' BPM');
   });
 
   $("#tempobuttondn").click(function() {
-    machine.subtractBPM();
-    $("#bpm").text(machine.BPM + ' BPM');
+    machine.subtractBpm();
+    $("#bpm").text(machine.Bpm + ' BPM');
   });
 
+  $("#tempodisplay").click(function() {
+    $("#bpmEntry").show();
+  });
 
+  $("#bpm").click(function() {
+    $("#bpmEntry").show();
+  });
 
+  $("#bpmEntry").click(function() {
+    $("#bpmEntry").show();
+  });
+
+  $('#bpmEntry').keypress(function(e){
+        if(e.keyCode==13)
+        $('#submit').click();
+      });
+
+  $("#bpmForm").submit(function() {
+    event.preventDefault();
+    var newBpm = parseInt($("#bpmEntry").val());
+    machine.setBpm(newBpm);
+    $("#bpmEntry").hide();
+    $("#bpm").text(machine.Bpm + ' BPM');
+  });
 });
