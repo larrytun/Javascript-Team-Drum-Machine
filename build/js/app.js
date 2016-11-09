@@ -148,6 +148,9 @@ $(function() {
   }
 
   $("#toggle").click(function() {
+    $(".speech-bubble").hide();
+    $(".speechText").hide();
+    $("#bpm").text(machine.Bpm + ' BPM');
     if (machine.playing) {
     } else {
       $('.frown').hide();
@@ -195,9 +198,12 @@ $(function() {
       machine.setBpm(newBpm);
       $("#bpmEntry").hide();
       $("#bpm").text(machine.Bpm + ' BPM');
-    }
-    if (newBpm > 220) {
-      
+      $(".speech-bubble").hide();
+      $(".speechText").hide();
+    } else {
+      $('.frown').hide();
+      $(".speech-bubble").show();
+      $(".speechText").show();
     }
   });
 });
