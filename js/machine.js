@@ -1,6 +1,7 @@
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 function Machine() {
+  this.name;
   this.steps = 16;
   this.i = 0;
   this.playing = false;
@@ -56,7 +57,7 @@ Machine.prototype.subtractBpm = function() {
 Machine.prototype.setBpm = function(newBpm) {
   console.log("bpm " + newBpm);
   this.Bpm = newBpm;
-}
+};
 
 exports.MachineModule = Machine;
 

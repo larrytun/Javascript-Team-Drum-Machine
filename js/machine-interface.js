@@ -11,7 +11,6 @@ function selectStep(p, q){
   };
 }
 
-
 var beatColumn = function(_i){
   $(".col" + (_i+1)).addClass("col-beat");
   $(".col" + _i).removeClass("col-beat");
@@ -19,7 +18,7 @@ var beatColumn = function(_i){
     $(".col" + (16)).removeClass("col-beat");
   }
   _i++;
-}
+};
 
 $(function() {
   machine.addInstrument("BD7525");
@@ -96,4 +95,16 @@ $(function() {
     $("#bpmEntry").hide();
     $("#bpm").text(machine.Bpm + ' BPM');
   });
+
+  $("#save-form").submit(function(){
+    event.preventDefault();
+    var songName = $("#track-name").val();
+    $("#track-name").val("");
+    machine.name = songName;
+    var beatsRef = firebase.database().ref('beats');
+    beatsRef.push(machine);
+
+
+  });
+
 });

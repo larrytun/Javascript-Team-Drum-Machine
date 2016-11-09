@@ -28,6 +28,7 @@ exports.InstrumentModule = Instrument;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 function Machine() {
+  this.name;
   this.steps = 16;
   this.i = 0;
   this.playing = false;
@@ -83,7 +84,7 @@ Machine.prototype.subtractBpm = function() {
 Machine.prototype.setBpm = function(newBpm) {
   console.log("bpm " + newBpm);
   this.Bpm = newBpm;
-}
+};
 
 exports.MachineModule = Machine;
 
@@ -103,7 +104,6 @@ function selectStep(p, q){
   };
 }
 
-
 var beatColumn = function(_i){
   $(".col" + (_i+1)).addClass("col-beat");
   $(".col" + _i).removeClass("col-beat");
@@ -111,7 +111,7 @@ var beatColumn = function(_i){
     $(".col" + (16)).removeClass("col-beat");
   }
   _i++;
-}
+};
 
 $(function() {
   machine.addInstrument("BD7525");
@@ -188,6 +188,18 @@ $(function() {
     $("#bpmEntry").hide();
     $("#bpm").text(machine.Bpm + ' BPM');
   });
+
+  $("#save-form").submit(function(){
+    event.preventDefault();
+    var songName = $("#track-name").val();
+    $("#track-name").val("");
+    machine.name = songName;
+    var beatsRef = firebase.database().ref('beats');
+    beatsRef.push(machine);
+
+
+  });
+
 });
 
 },{"./../js/instrument.js":1,"./../js/machine.js":2}]},{},[3]);

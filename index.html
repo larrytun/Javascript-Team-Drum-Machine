@@ -6,8 +6,6 @@
     <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
     <link rel="stylesheet" href="build/css/vendor.css">
     <link rel="stylesheet" href="build/css/styles.css">
-    <script src="build/js/vendor.min.js"></script>
-    <script type="text/javascript" src="build/js/app.js"></script>
     <title>Drum Machine</title>
   </head>
   <body>
@@ -33,9 +31,40 @@
 
     </div>
 
+<div id="save-tracks">
+  <form id="save-form">
+    <label for="track-name">Drop da beat yo'</label>
+    <br>
+    <input type="text" name="track-name" id="track-name" required>
+    <br><br>
+    <button type="submit" id="save">Save</button>
+  </form>
+    <div class="tracks-list-box">
+      <h6>Saved Tracks:</h6>
+      <div class="tracks-list">
+
+      </div>
+    </div>
+</div>
+
     <div id="sounds">
 
     </div>
 
   </body>
+
+  <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB0sJAB90k7dndAIOQE8AkL9VwYST4_kpM",
+      authDomain: "js-team-drum-machine.firebaseapp.com",
+      databaseURL: "https://js-team-drum-machine.firebaseio.com",
+      storageBucket: "js-team-drum-machine.appspot.com",
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="build/js/vendor.min.js"></script>
+  <script type="text/javascript" src="build/js/app.js"></script>
+
 </html>
