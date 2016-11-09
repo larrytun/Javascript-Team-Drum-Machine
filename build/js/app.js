@@ -1,6 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-function Instrument(sound) {
+function Instrument(sound, displayName) {
   this.sound = sound;
+  this.displayName = displayName;
   this.soundArray = [];
   this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   this.generateSounds(sound);
@@ -36,8 +37,8 @@ function Machine() {
   this.Bpm = 120;
 }
 
-Machine.prototype.addInstrument = function(instrumentName) {
-  var instrument = new Instrument(instrumentName);
+Machine.prototype.addInstrument = function(sound, instrumentName) {
+  var instrument = new Instrument(sound, instrumentName);
   this.allInstruments.push(instrument);
 };
 
@@ -114,12 +115,12 @@ var beatColumn = function(_i){
 }
 
 $(function() {
-  machine.addInstrument("BD7525");
-  machine.addInstrument("cymbal1");
-  machine.addInstrument("CB");
-  machine.addInstrument("HANDCLP1");
-  machine.addInstrument("MA");
-  machine.addInstrument("HC10");
+  machine.addInstrument("BD7525", "Kick");
+  machine.addInstrument("cymbal1", "Cymbal");
+  machine.addInstrument("CB", "Cowbell");
+  machine.addInstrument("HANDCLP1", "Clap");
+  machine.addInstrument("MA", "Shaker");
+  machine.addInstrument("HC10", "Boop");
 
   $("#bpm").text(machine.Bpm + ' BPM');
 
@@ -130,7 +131,7 @@ $(function() {
     row = ".row" + i;
     $("#track-area").append(
       '<img src="public/img/instrument-display.png" id="instrument' + i + '"/>' +
-    '<div class="instrument-name"><h2>' + machine.allInstruments[i-1].sound + '</h2></div>' +
+    '<div class="instrument-name"><h2>' + machine.allInstruments[i-1].displayName + '</h2></div>' +
     '<div class="row'+ i + '"></div>');
     for (var j = 1; j < machine.steps + 1; j++) {
       $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
@@ -177,9 +178,10 @@ $(function() {
   });
 
   $('#bpmEntry').keypress(function(e){
-        if(e.keyCode==13)
-        $('#submit').click();
-      });
+    if(e.keyCode==13) {
+      $('#submit').click();
+    }
+  });
 
   $("#bpmForm").submit(function() {
     event.preventDefault();
