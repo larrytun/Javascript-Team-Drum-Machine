@@ -5,6 +5,7 @@ var machine = new Machine();
 
 function selectStep(p, q){
   return function(){
+    console.log("select" + p + " " + q);
     $("#row" + p + "col" + q).toggleClass("step-selected");
     machine.allInstruments[p-1].toggleStep(q-1);
   };
@@ -48,9 +49,10 @@ $(function() {
 
 
 
-
-  for (var p = 1; p < rows+1; p++){
-    for (var q = 1; q < cols+1; q++) {
+console.log(rows);
+console.log(cols);
+  for (var p = 1; p <= rows; p++){
+    for (var q = 1; q <= cols; q++) {
       $("#row" + p + "col" + q).click(selectStep(p, q));
     }
   }

@@ -34,7 +34,6 @@ Machine.prototype.toggleLoop = function(_beatColumn) {
       }
     }
     _beatColumn(_this.i);
-    console.log(_this.i);
     _this.i++;
   }
   this.playing = true;

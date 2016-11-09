@@ -8,7 +8,7 @@ function Instrument(sound) {
 
 Instrument.prototype.generateSounds = function(thisSound) {
   for (var i = 0; i < 16; i++) {
-    $("#sounds").append("<audio src='public/sounds/" + this.sound + ".WAV' id='" + this.sound + i + "' controls></audio>");
+    $("#sounds").append("<audio src='public/sounds/" + this.sound + ".WAV' id='" + this.sound + i + "'></audio>");
     var sound = document.getElementById(this.sound + i);
     this.soundArray.push(sound);
   }
@@ -61,7 +61,6 @@ Machine.prototype.toggleLoop = function(_beatColumn) {
       }
     }
     _beatColumn(_this.i);
-    console.log(_this.i);
     _this.i++;
   }
   this.playing = true;
@@ -93,6 +92,7 @@ var machine = new Machine();
 
 function selectStep(p, q){
   return function(){
+    console.log("select" + p + " " + q);
     $("#row" + p + "col" + q).toggleClass("step-selected");
     machine.allInstruments[p-1].toggleStep(q-1);
   };
@@ -136,9 +136,10 @@ $(function() {
 
 
 
-
-  for (var p = 1; p < rows+1; p++){
-    for (var q = 1; q < cols+1; q++) {
+console.log(rows);
+console.log(cols);
+  for (var p = 1; p <= rows; p++){
+    for (var q = 1; q <= cols; q++) {
       $("#row" + p + "col" + q).click(selectStep(p, q));
     }
   }
