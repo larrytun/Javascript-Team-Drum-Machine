@@ -56,10 +56,15 @@ $(function() {
 
   $("#toggle").click(function() {
     if (machine.playing) {
-      machine.stopLoop();
     } else {
+      $('.frown').hide();
       machine.toggleLoop(beatColumn);
     }
+  });
+
+  $("#stopbutton").click(function() {
+    machine.stopLoop();
+    $('.frown').show();
   });
 
   $("#tempobuttonup").click(function() {
