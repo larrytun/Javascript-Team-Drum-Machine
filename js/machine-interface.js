@@ -3,21 +3,6 @@ var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 var machine = new Machine();
 
-var allSounds = [];
-
-
-
-function createSounds(_sound){
-  var soundArray = [];
-  for (var i = 0; i < 16; i++) {
-    $("#sounds").append("<audio src='public/sounds/" + _sound + ".WAV' id='" + _sound + i + "' controls></audio>");
-    var sound = document.getElementById(_sound + i);
-    soundArray.push(sound);
-  }
-  allSounds.push(soundArray);
-}
-
-
 function selectStep(p, q){
   return function(){
     $("#row" + p + "col" + q).toggleClass("step-selected");
@@ -25,13 +10,23 @@ function selectStep(p, q){
   };
 }
 
+
+var beatColumn = function(_i){
+  $(".col" + (_i+1)).addClass("col-beat");
+  $(".col" + _i).removeClass("col-beat");
+  if (_i===0) {
+    $(".col" + (16)).removeClass("col-beat");
+  }
+  _i++;
+}
+
 $(function() {
-  machine.addInstrument("bass2");
+  machine.addInstrument("BD7525");
   machine.addInstrument("cymbal1");
   machine.addInstrument("CB");
-  machine.addInstrument("LTAD7");
-  machine.addInstrument("OPCL2");
-  machine.addInstrument("RIDED8");
+  machine.addInstrument("HANDCLP1");
+  machine.addInstrument("MA");
+  machine.addInstrument("HC10");
 
   $("#bpm").text(machine.BPM + ' BPM');
 
@@ -56,8 +51,6 @@ $(function() {
 
   for (var p = 1; p < rows+1; p++){
     for (var q = 1; q < cols+1; q++) {
-      console.log(p);
-      console.log(q);
       $("#row" + p + "col" + q).click(selectStep(p, q));
     }
   }
@@ -66,7 +59,7 @@ $(function() {
     if (machine.playing) {
       machine.stopLoop();
     } else {
-      machine.toggleLoop();
+      machine.toggleLoop(beatColumn);
     }
   });
 

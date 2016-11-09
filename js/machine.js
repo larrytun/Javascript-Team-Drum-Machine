@@ -21,7 +21,7 @@ Machine.prototype.getNoteDuration = function() {
   return noteDuration;
 };
 
-Machine.prototype.toggleLoop = function() {
+Machine.prototype.toggleLoop = function(_beatColumn) {
   var _this = this;
   function metronome() {
     if( _this.i === _this.steps) {
@@ -33,16 +33,9 @@ Machine.prototype.toggleLoop = function() {
         _this.allInstruments[i].soundArray[_this.i].play();
       }
     }
-      // MAKE THIS A CALLBACK FUNCTION
-    $(".col" + (_this.i+1)).addClass("col-beat");
-    $(".col" + _this.i).removeClass("col-beat");
-    if (_this.i===0) {
-      $(".col" + (16)).removeClass("col-beat");
-    }
-
-
+    _beatColumn(_this.i);
+    console.log(_this.i);
     _this.i++;
-    // this.getNoteDuration();
   }
   this.playing = true;
   this.loop = setInterval(metronome, this.getNoteDuration());
