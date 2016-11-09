@@ -28,6 +28,7 @@ exports.InstrumentModule = Instrument;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 function Machine() {
+  this.id;
   this.name;
   this.producer;
   this.steps = 16;
@@ -97,6 +98,7 @@ var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 var machine = new Machine();
 var savedBeats = [];
+var beatsRef = firebase.database().ref('beats');
 
 function selectStep(p, q){
   return function(){
@@ -115,7 +117,45 @@ var beatColumn = function(_i){
   _i++;
 };
 
+var clickableSavedBeats = function(_id){
+  $("#track-" + _id).click(function(){
+    for (var i = 0; i < savedBeats.length; i++) {
+      if (savedBeats[i].id === _id) {
+        machine = savedBeats[i];
+        console.log(machine);
+      }
+    }
+  });
+};
+
+var clickFunction = function(_id){
+  console.log(_id);
+  for (var i = 0; i < savedBeats.length; i++) {
+    if (savedBeats[i].id === _id) {
+      machine = savedBeats[i];
+    }
+  }
+};
+
+var readDatabase = function(){
+  beatsRef.once('value').then(function(snapshot){
+    var databaseBeats = JSON.parse(JSON.stringify(snapshot.val()));
+    savedBeats = [];
+    Object.keys(databaseBeats).forEach(function(key) {
+      savedBeats.push(databaseBeats[key]);
+      savedBeats[savedBeats.length-1].id = key;
+    });
+    $(".tracks-list").html("");
+    savedBeats.forEach(function(beat){
+      $(".tracks-list").append("<li id='track-" + beat.id + "'>" + beat.name + " by: <em>" + beat.producer + "</em></li>");
+      clickableSavedBeats(beat.id);
+    });
+  });
+};
+
+
 $(function() {
+  readDatabase();
   machine.addInstrument("BD7525");
   machine.addInstrument("cymbal1");
   machine.addInstrument("CB");
@@ -198,22 +238,13 @@ $(function() {
     machine.name = songName;
     machine.producer = producerName;
     // WRITE TO FIREBASE
-    var beatsRef = firebase.database().ref('beats');
     beatsRef.push(machine);
     // READ FROM FIREBASE
-    beatsRef.once('value').then(function(snapshot){
-      var databaseBeats = JSON.parse(JSON.stringify(snapshot.val()));
-      savedBeats = [];
-      Object.keys(databaseBeats).forEach(function(key) {
-        savedBeats.push(databaseBeats[key]);
-      });
-      $(".tracks-list").html("");
-      savedBeats.forEach(function(beat){
-        console.log(beat);
-        $(".tracks-list").append("<li>" + beat.name + " by: <em>" + beat.producer + "</em></li>");
-      });
-    });
+    readDatabase();
   });
+
+
+
 
 });
 
