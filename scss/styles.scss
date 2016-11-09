@@ -196,6 +196,26 @@ body{
   position: absolute;
 }
 
+#displayName {
+  text-align: center;
+}
+
+#displayN {
+  font-size: medium;
+}
+
+.frown {
+  float: left;
+  position: absolute;
+  width: 12%;
+  height: 12%;
+  background-color: #B9DFCA;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 185px;
+  margin-left: 145px;
+}
+
 .row1 {
   margin-top: -70px;
 }

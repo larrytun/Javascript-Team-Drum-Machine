@@ -1,5 +1,6 @@
-function Instrument(sound) {
+function Instrument(sound, displayName) {
   this.sound = sound;
+  this.displayName = displayName;
   this.soundArray = [];
   this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   this.generateSounds(sound);

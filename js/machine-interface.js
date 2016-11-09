@@ -61,12 +61,12 @@ var readDatabase = function(){
 
 $(function() {
   readDatabase();
-  machine.addInstrument("BD7525");
-  machine.addInstrument("cymbal1");
-  machine.addInstrument("CB");
-  machine.addInstrument("HANDCLP1");
-  machine.addInstrument("MA");
-  machine.addInstrument("HC10");
+  machine.addInstrument("BD7525", "Kick");
+  machine.addInstrument("cymbal1", "Cymbal");
+  machine.addInstrument("CB", "Cowbell");
+  machine.addInstrument("HANDCLP1", "Clap");
+  machine.addInstrument("MA", "Shaker");
+  machine.addInstrument("HC10", "Boop");
 
   $("#bpm").text(machine.Bpm + ' BPM');
 
@@ -77,7 +77,7 @@ $(function() {
     row = ".row" + i;
     $("#track-area").append(
       '<img src="public/img/instrument-display.png" id="instrument' + i + '"/>' +
-    '<div class="instrument-name"><h2>' + machine.allInstruments[i-1].sound + '</h2></div>' +
+    '<div class="instrument-name"><div id="displayName"><h2 id="displayN">' + machine.allInstruments[i-1].displayName + '</h2></div></div>' +
     '<div class="row'+ i + '"></div>');
     for (var j = 1; j < machine.steps + 1; j++) {
       $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
@@ -93,10 +93,15 @@ $(function() {
 
   $("#toggle").click(function() {
     if (machine.playing) {
-      machine.stopLoop();
     } else {
+      $('.frown').hide();
       machine.toggleLoop(beatColumn);
     }
+  });
+
+  $("#stopbutton").click(function() {
+    machine.stopLoop();
+    $('.frown').show();
   });
 
   $("#tempobuttonup").click(function() {
@@ -122,16 +127,22 @@ $(function() {
   });
 
   $('#bpmEntry').keypress(function(e){
-        if(e.keyCode==13)
-        $('#submit').click();
-      });
+    if(e.keyCode==13) {
+      $('#submit').click();
+    }
+  });
 
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    machine.setBpm(newBpm);
-    $("#bpmEntry").hide();
-    $("#bpm").text(machine.Bpm + ' BPM');
+    if (!(isNaN(newBpm)) &&  newBpm < 220) {
+      machine.setBpm(newBpm);
+      $("#bpmEntry").hide();
+      $("#bpm").text(machine.Bpm + ' BPM');
+    }
+    if (newBpm > 220) {
+
+    }
   });
 
   $("#save-form").submit(function(){
