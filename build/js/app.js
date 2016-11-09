@@ -95,6 +95,7 @@ var Machine = require('./../js/machine.js').MachineModule;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 var machine = new Machine();
+var savedBeats;
 
 function selectStep(p, q){
   return function(){
@@ -194,9 +195,18 @@ $(function() {
     var songName = $("#track-name").val();
     $("#track-name").val("");
     machine.name = songName;
+    // WRITE TO FIREBASE
     var beatsRef = firebase.database().ref('beats');
     beatsRef.push(machine);
-
+    // READ FROM FIREBASE
+    beatsRef.once('value').then(function(snapshot){
+      savedBeats = JSON.parse(JSON.stringify(snapshot.val()));
+      console.log(savedBeats);
+    }).then(function(){
+      for (var i = 0; i < savedBeats.length; i++) {
+        $(".tracks-list").append(savedBeats[i].name);
+      }
+    });
 
   });
 
