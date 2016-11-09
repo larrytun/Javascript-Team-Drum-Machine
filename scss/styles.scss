@@ -204,16 +204,16 @@ body{
   font-size: medium;
 }
 
-#frown {
+.frown {
   float: left;
   position: absolute;
   width: 12%;
-}
-
-.frown-face {
-  float: left;
+  height: 12%;
   background-color: #B9DFCA;
-  border: 2px solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 185px;
+  margin-left: 145px;
 }
 
 .row1 {

@@ -57,12 +57,14 @@ $(function() {
   $("#toggle").click(function() {
     if (machine.playing) {
     } else {
+      $('.frown').hide();
       machine.toggleLoop(beatColumn);
     }
   });
 
   $("#stopbutton").click(function() {
     machine.stopLoop();
+    $('.frown').show();
   });
 
   $("#tempobuttonup").click(function() {
