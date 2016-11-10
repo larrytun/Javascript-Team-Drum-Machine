@@ -7,7 +7,10 @@ function Instrument(sound, displayName) {
 }
 
 Instrument.prototype.clear = function(){
-  this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.boolArray.splice(0, 16);
+  for (var i = 0; i < 16; i++) {
+    this.boolArray.push(false);
+  }
 };
 
 Instrument.prototype.generateSounds = function(thisSound) {

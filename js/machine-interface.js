@@ -22,6 +22,14 @@ var beatColumn = function(_i){
   _i++;
 };
 
+var clearSelected = function(){
+  for (var i = 0; i < 16; i++) {
+    $(".column").removeClass("step-selected");
+    $(".column").removeClass("col-beat");
+  }
+  $("#bpm").text(machine.Bpm + ' BPM');
+};
+
 var clickableSavedBeats = function(_id, _selectStep){
   $("#track-" + _id).click(function(){
     for (var i = 0; i < savedBeats.length; i++) {
@@ -29,7 +37,7 @@ var clickableSavedBeats = function(_id, _selectStep){
         console.log(machine);
         machine.name = savedBeats[i].name;
         machine.producer = savedBeats[i].producer;
-        machine.clear();
+        machine.clear(clearSelected);
         for (var x = 0; x < savedBeats[i].allInstruments.length; x++) {
           for (var y = 0; y < savedBeats[i].allInstruments[x].boolArray.length; y++) {
             if (savedBeats[i].allInstruments[x].boolArray[y]) {
@@ -93,7 +101,7 @@ $(function() {
     '<div class="instrument-name"><div id="displayName"><h2 id="displayN">' + machine.allInstruments[i-1].displayName + '</h2></div></div>' +
     '<div class="row'+ i + '"></div>');
     for (var j = 1; j < machine.steps + 1; j++) {
-      $(row).append('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
+      $(row).append('<div id="row'+i+'col'+j+'" class="column step-unselected col' +j+ '"></div>');
     // console.log('<div id="row'+i+'col'+j+'" class="step-unselected col' +j+ '"></div>');
     }
   }
@@ -140,6 +148,10 @@ $(function() {
 
   $("#bpmEntry").click(function() {
     $("#bpmEntry").show();
+  });
+
+  $("#round-bar").click(function() {
+    machine.clear(clearSelected);
   });
 
   $('#bpmEntry').keypress(function(e){

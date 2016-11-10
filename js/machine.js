@@ -61,12 +61,14 @@ Machine.prototype.setBpm = function(newBpm) {
   this.Bpm = newBpm;
 };
 
-Machine.prototype.clear = function(){
+Machine.prototype.clear = function(_clearSelected){
   for (var i = 0; i < this.allInstruments.length; i++) {
     this.allInstruments[i].clear();
-    console.log(this.allInstruments[i]);
   }
-  console.log(this.allInstruments);
+  this.i = 0;
+  this.Bpm = 120;
+  this.playing = false;
+  _clearSelected();
 };
 
 exports.MachineModule = Machine;
