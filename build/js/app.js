@@ -164,6 +164,7 @@ $(function() {
   machine.addInstrument("HANDCLP1", "Clap");
   machine.addInstrument("MA", "Shaker");
   machine.addInstrument("HC10", "Boop");
+  machine.addInstrument("SD2510", "Snare");
 
   $("#bpm").text(machine.Bpm + ' BPM');
 
