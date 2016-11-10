@@ -187,6 +187,7 @@ $(function() {
   machine.addInstrument("HANDCLP1", "Clap");
   machine.addInstrument("MA", "Shaker");
   machine.addInstrument("HC10", "Boop");
+  machine.addInstrument("SD2510", "Snare");
 
   $("#bpm").text(machine.Bpm + ' BPM');
 
@@ -258,7 +259,7 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    if (!(isNaN(newBpm)) &&  newBpm < 220) {
+    if (!(isNaN(newBpm)) && newBpm < 220 && newBpm > 0) {
       machine.setBpm(newBpm);
       $("#bpmEntry").hide();
       $("#bpm").text(machine.Bpm + ' BPM');
@@ -287,10 +288,6 @@ $(function() {
     // READ FROM FIREBASE
     readDatabase();
   });
-
-
-
-
 });
 
 },{"./../js/instrument.js":1,"./../js/machine.js":2}]},{},[3]);
