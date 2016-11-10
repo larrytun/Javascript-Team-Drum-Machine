@@ -5,13 +5,13 @@ var machine = new Machine();
 var savedBeats = [];
 var beatsRef = firebase.database().ref('beats');
 
-function selectStep(p, q){
+var selectStep = function (p, q){
   return function(){
     console.log("select" + p + " " + q);
     $("#row" + p + "col" + q).toggleClass("step-selected");
     machine.allInstruments[p-1].toggleStep(q-1);
   };
-}
+};
 
 var beatColumn = function(_i){
   $(".col" + (_i+1)).addClass("col-beat");
@@ -22,12 +22,23 @@ var beatColumn = function(_i){
   _i++;
 };
 
-var clickableSavedBeats = function(_id){
+var clickableSavedBeats = function(_id, _selectStep){
   $("#track-" + _id).click(function(){
     for (var i = 0; i < savedBeats.length; i++) {
       if (savedBeats[i].id === _id) {
-        machine = savedBeats[i];
         console.log(machine);
+        machine.name = savedBeats[i].name;
+        machine.producer = savedBeats[i].producer;
+        machine.clear();
+        for (var x = 0; x < savedBeats[i].allInstruments.length; x++) {
+          for (var y = 0; y < savedBeats[i].allInstruments[x].boolArray.length; y++) {
+            if (savedBeats[i].allInstruments[x].boolArray[y]) {
+              console.log("select" + x + " " + y);
+              $("#row" + (x+1) + "col" + (y+1)).toggleClass("step-selected");
+              machine.allInstruments[x].toggleStep(y);
+            }
+          }
+        }
       }
     }
   });
@@ -53,7 +64,7 @@ var readDatabase = function(){
     $(".tracks-list").html("");
     savedBeats.forEach(function(beat){
       $(".tracks-list").append("<li id='track-" + beat.id + "'>" + beat.name + " by: <em>" + beat.producer + "</em></li>");
-      clickableSavedBeats(beat.id);
+      clickableSavedBeats(beat.id, selectStep);
     });
   });
 };

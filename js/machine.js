@@ -61,6 +61,14 @@ Machine.prototype.setBpm = function(newBpm) {
   this.Bpm = newBpm;
 };
 
+Machine.prototype.clear = function(){
+  for (var i = 0; i < this.allInstruments.length; i++) {
+    this.allInstruments[i].clear();
+    console.log(this.allInstruments[i]);
+  }
+  console.log(this.allInstruments);
+};
+
 exports.MachineModule = Machine;
 
 //Front-End Emulation
