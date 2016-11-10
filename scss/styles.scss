@@ -99,7 +99,7 @@ body{
 
 
 
-#stopbutton:hover, #tempobuttonup:hover, #tempobuttondn:hover, #toggle:hover, #round-bar:hover {
+#stopbutton:hover, #tempobuttonup:hover, #tempobuttondn:hover, #toggle:hover, #round-bar:hover, .pausebutton:hover {
   opacity: 0.6;
 }
 
@@ -117,6 +117,16 @@ body{
     position: absolute;
     margin-top: 374px;
     margin-left: 76px;
+}
+
+#clear{
+  display: none;
+  // float: left;
+  // position: fixed;
+  // margin-top: 374px;
+  // margin-left: 76px;
+  // font-family: 'Press Start 2P', cursive;
+  // color: white;
 }
 
 #little-circle {
@@ -387,24 +397,56 @@ body{
 }
 
 #save-tracks{
-  display: block;
-  position: absolute;
-  bottom: 22px;
-  left: 22px;
+  float: left;
+  margin: 2em;
   padding: 2em;
   width: 30em;
-  background-color: rgba(250, 250, 250, 1);
+  height: 18em;
+  background-color: rgba(255, 255, 255, .8);
+  border: 3px solid black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  input{
+    background-color: white;
+    color: #03467C;
+    margin-bottom: 1em;
+  }
+}
+
+#save{
+  background-color: #03467C;
+  color: white;
+}
+
+#save:hover{
+  font-size: 2em;
 }
 
 .tracks-list-box{
-  display: block;
-  position: absolute;
-  bottom: 22px;
-  right: 22px;
+  float: left;
+  margin: 2em 2em 2em 0;
   padding: 0 2em 2em 2em;
   width: 30em;
-  background-color: rgba(250, 250, 250, 1);
+  background-color: rgba(255, 255, 255, .8);
   float: right;
-  max-height: 10em;
+  min-height: 18em;
+  max-height: 22em;
   overflow: auto;
+  border: 3px solid black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  ul{
+    list-style-type: square;
+    li{
+      cursor: pointer;
+      margin: .5em;
+    }
+    li:hover{
+      font-style: italic;
+    }
+  }
+}
+
+.bottom-boxes{
+  display: inline-block;
 }

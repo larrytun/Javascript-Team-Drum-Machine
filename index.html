@@ -17,7 +17,7 @@
       <img src="public/img/tempo-button-down.png" id="tempobuttondn" alt="" />
       <img src="public/img/round-bar.png" id="round-bar" alt="" />
       <img src="public/img/little-circle.png" id="little-circle" alt="" />
-      <img src="public/img/little-green-circle.png" id="little-green-circle" alt="" />
+      <img src="public/img/little-green-circle.png" class="pausebutton" id="little-green-circle" alt="" />
       <div class="tempo">
         <img src="public/img/tempodisplay.png" id="tempodisplay" alt="" />
         <h6 id="bpm"></h6>
@@ -33,9 +33,11 @@
       </form>
       <div class="container" id="track-area">
       </div>
+      <span id="clear">CLEAR</span>
     </div>
 
-    <div id="save-tracks">
+
+    <div class="bottom-boxes" id="save-tracks">
       <form id="save-form">
         <label for="track-name">Title:</label>
         <br>
@@ -49,7 +51,7 @@
       </form>
     </div>
 
-    <div class="tracks-list-box">
+    <div class="tracks-list-box bottom-boxes">
       <h6>Saved Tracks:</h6>
       <ul class="tracks-list">
 

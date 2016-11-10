@@ -45,6 +45,12 @@ Machine.prototype.toggleLoop = function(_beatColumn) {
 
 Machine.prototype.stopLoop = function() {
   this.playing = false;
+  this.i = 0;
+  clearInterval(this.loop);
+};
+
+Machine.prototype.pauseLoop = function() {
+  this.playing = false;
   clearInterval(this.loop);
 };
 
@@ -65,6 +71,8 @@ Machine.prototype.clear = function(_clearSelected){
   for (var i = 0; i < this.allInstruments.length; i++) {
     this.allInstruments[i].clear();
   }
+  this.name= "";
+  this.producer= "";
   this.i = 0;
   this.Bpm = 120;
   this.playing = false;

@@ -37,6 +37,11 @@ var clickableSavedBeats = function(_id, _selectStep){
         console.log(machine);
         machine.name = savedBeats[i].name;
         machine.producer = savedBeats[i].producer;
+        machine.setBpm(savedBeats[i].Bpm);
+        $("#bpm").text(machine.Bpm + ' BPM');
+        $(".speech-bubble").hide();
+        $(".speechText").hide();
+        machine.i = 0;
         machine.clear(clearSelected);
         for (var x = 0; x < savedBeats[i].allInstruments.length; x++) {
           for (var y = 0; y < savedBeats[i].allInstruments[x].boolArray.length; y++) {
@@ -125,6 +130,12 @@ $(function() {
 
   $("#stopbutton").click(function() {
     machine.stopLoop();
+    $(".column").removeClass("col-beat");
+    $('.frown').show();
+  });
+
+  $(".pausebutton").click(function() {
+    machine.pauseLoop();
     $('.frown').show();
   });
 
@@ -151,7 +162,9 @@ $(function() {
   });
 
   $("#round-bar").click(function() {
-    machine.clear(clearSelected);
+    if (confirm("Are you sure? You will lose all current unsaved data!")) {
+      machine.clear(clearSelected);
+    }
   });
 
   $('#bpmEntry').keypress(function(e){
