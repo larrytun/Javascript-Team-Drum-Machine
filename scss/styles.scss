@@ -366,6 +366,26 @@ body{
   margin-left: -19px;
 }
 
+.speech-bubble {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: -40px;
+  z-index: 2;
+  display: none;
+}
+
+.speechText {
+  position: absolute;
+  margin-left: 267px;
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: bolder;
+  text-align: center;
+  z-index: 3;
+  font-family: 'Press Start 2P', cursive;
+  display: none;
+}
+
 #save-tracks{
   display: block;
   position: fixed;

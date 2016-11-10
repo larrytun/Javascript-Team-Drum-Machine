@@ -1,3 +1,99 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+function Instrument(sound, displayName) {
+  this.sound = sound;
+  this.displayName = displayName;
+  this.soundArray = [];
+  this.boolArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  this.generateSounds(sound);
+}
+
+Instrument.prototype.generateSounds = function(thisSound) {
+  for (var i = 0; i < 16; i++) {
+    $("#sounds").append("<audio src='public/sounds/" + this.sound + ".WAV' id='" + this.sound + i + "'></audio>");
+    var sound = document.getElementById(this.sound + i);
+    this.soundArray.push(sound);
+  }
+};
+
+Instrument.prototype.toggleStep = function(index) {
+  if (this.boolArray[index]) {
+    this.boolArray[index] = false;
+  } else {
+    this.boolArray[index] = true;
+  }
+};
+
+exports.InstrumentModule = Instrument;
+
+},{}],2:[function(require,module,exports){
+var Instrument = require('./../js/instrument.js').InstrumentModule;
+
+function Machine() {
+  this.id;
+  this.name;
+  this.producer;
+  this.steps = 16;
+  this.i = 0;
+  this.playing = false;
+  this.loop;
+  this.allInstruments = [];
+  this.Bpm = 120;
+}
+
+Machine.prototype.addInstrument = function(sound, instrumentName) {
+  var instrument = new Instrument(sound, instrumentName);
+  this.allInstruments.push(instrument);
+};
+
+Machine.prototype.getNoteDuration = function() {
+  var ms = 60000/this.Bpm;
+  var s = ms * 4;
+  var noteDuration = s/16;
+  return noteDuration;
+};
+
+Machine.prototype.toggleLoop = function(_beatColumn) {
+  var _this = this;
+  function metronome() {
+    if( _this.i === _this.steps) {
+      _this.i = 0;
+    }
+    for (var i = 0; i < _this.allInstruments.length; i++) {
+      if (_this.allInstruments[i].boolArray[_this.i]) {
+        // console.log(_this.allInstruments[i].soundArray);
+        _this.allInstruments[i].soundArray[_this.i].play();
+      }
+    }
+    _beatColumn(_this.i);
+    _this.i++;
+  }
+  this.playing = true;
+  this.loop = setInterval(metronome, this.getNoteDuration());
+};
+
+Machine.prototype.stopLoop = function() {
+  this.playing = false;
+  clearInterval(this.loop);
+};
+
+Machine.prototype.addBpm = function() {
+  this.Bpm += 1;
+};
+
+Machine.prototype.subtractBpm = function() {
+  this.Bpm--;
+};
+
+Machine.prototype.setBpm = function(newBpm) {
+  console.log("bpm " + newBpm);
+  this.Bpm = newBpm;
+};
+
+exports.MachineModule = Machine;
+
+//Front-End Emulation
+
+},{"./../js/instrument.js":1}],3:[function(require,module,exports){
 var Machine = require('./../js/machine.js').MachineModule;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
@@ -173,3 +269,5 @@ $(function() {
 
 
 });
+
+},{"./../js/instrument.js":1,"./../js/machine.js":2}]},{},[3]);
