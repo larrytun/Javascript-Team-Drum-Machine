@@ -139,7 +139,7 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    if (!(isNaN(newBpm)) &&  newBpm < 220) {
+    if (!(isNaN(newBpm)) && newBpm < 220 && newBpm > 0) {
       machine.setBpm(newBpm);
       $("#bpmEntry").hide();
       $("#bpm").text(machine.Bpm + ' BPM');
@@ -168,8 +168,4 @@ $(function() {
     // READ FROM FIREBASE
     readDatabase();
   });
-
-
-
-
 });
