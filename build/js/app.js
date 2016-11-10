@@ -29,6 +29,9 @@ exports.InstrumentModule = Instrument;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 function Machine() {
+  this.id;
+  this.name;
+  this.producer;
   this.steps = 16;
   this.i = 0;
   this.playing = false;
@@ -95,6 +98,8 @@ var Machine = require('./../js/machine.js').MachineModule;
 var Instrument = require('./../js/instrument.js').InstrumentModule;
 
 var machine = new Machine();
+var savedBeats = [];
+var beatsRef = firebase.database().ref('beats');
 
 function selectStep(p, q){
   return function(){
@@ -104,7 +109,6 @@ function selectStep(p, q){
   };
 }
 
-
 var beatColumn = function(_i){
   $(".col" + (_i+1)).addClass("col-beat");
   $(".col" + _i).removeClass("col-beat");
@@ -112,9 +116,48 @@ var beatColumn = function(_i){
     $(".col" + (16)).removeClass("col-beat");
   }
   _i++;
-}
+};
+
+var clickableSavedBeats = function(_id){
+  $("#track-" + _id).click(function(){
+    for (var i = 0; i < savedBeats.length; i++) {
+      if (savedBeats[i].id === _id) {
+        machine = savedBeats[i];
+        console.log(machine);
+      }
+    }
+  });
+};
+
+var clickFunction = function(_id){
+  console.log(_id);
+  for (var i = 0; i < savedBeats.length; i++) {
+    if (savedBeats[i].id === _id) {
+      machine = savedBeats[i];
+    }
+  }
+};
+
+var readDatabase = function(){
+  beatsRef.once('value').then(function(snapshot){
+    var databaseBeats = JSON.parse(JSON.stringify(snapshot.val()));
+    savedBeats = [];
+    Object.keys(databaseBeats).forEach(function(key) {
+      savedBeats.push(databaseBeats[key]);
+      savedBeats[savedBeats.length-1].id = key;
+    });
+    $(".tracks-list").html("");
+    savedBeats.forEach(function(beat){
+      $(".tracks-list").append("<li id='track-" + beat.id + "'>" + beat.name + " by: <em>" + beat.producer + "</em></li>");
+      clickableSavedBeats(beat.id);
+    });
+  });
+};
+
 
 $(function() {
+
+  readDatabase();
   machine.addInstrument("BD7525", "Kick");
   machine.addInstrument("cymbal1", "Cymbal");
   machine.addInstrument("CB", "Cowbell");
@@ -139,8 +182,6 @@ $(function() {
     }
   }
 
-  console.log(rows);
-  console.log(cols);
   for (var p = 1; p <= rows; p++){
     for (var q = 1; q <= cols; q++) {
       $("#row" + p + "col" + q).click(selectStep(p, q));
@@ -148,6 +189,9 @@ $(function() {
   }
 
   $("#toggle").click(function() {
+    $(".speech-bubble").hide();
+    $(".speechText").hide();
+    $("#bpm").text(machine.Bpm + ' BPM');
     if (machine.playing) {
     } else {
       $('.frown').hide();
@@ -191,14 +235,34 @@ $(function() {
   $("#bpmForm").submit(function() {
     event.preventDefault();
     var newBpm = parseInt($("#bpmEntry").val());
-    if (!(isNaN(newBpm)) &&  newBpm < 220) {
+    if (!(isNaN(newBpm)) && newBpm < 220 && newBpm > 0) {
       machine.setBpm(newBpm);
       $("#bpmEntry").hide();
       $("#bpm").text(machine.Bpm + ' BPM');
+      $(".speech-bubble").hide();
+      $(".speechText").hide();
+      if (!(machine.playing)) {
+        $('.frown').show();
+      }
+    } else {
+      $('.frown').hide();
+      $(".speech-bubble").show();
+      $(".speechText").show();
     }
-    if (newBpm > 220) {
-      
-    }
+  });
+
+  $("#save-form").submit(function(){
+    event.preventDefault();
+    var songName = $("#track-name").val();
+    var producerName = $("#producer-name").val();
+    $("#track-name").val("");
+    $("#producer-name").val("");
+    machine.name = songName;
+    machine.producer = producerName;
+    // WRITE TO FIREBASE
+    beatsRef.push(machine);
+    // READ FROM FIREBASE
+    readDatabase();
   });
 });
 
