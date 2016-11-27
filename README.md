@@ -23,6 +23,9 @@ Users can toggle instrument steps and play tracks at specific beats per minute.
 
 ## Setup/Installation Requirements
 
+Available through github-pages at: https://larrytun.github.io/Javascript-Team-Drum-Machine/
+
+To run locally:
 * _Clone this repository to your desktop_
 * _run npm install and bower install in the home directory_
 * _run all commands in the npm_commands.txt_
